@@ -41,8 +41,13 @@ CaseStudyProject/
 │       └── ChatSwipeActionProvider.swift      // Swipe aksiyon butonlarını sağlayan yardımcı
 │
 ├── ViewModel/
-    └── ChatListViewModel.swift            // Tüm iş mantığı ve filtreleme
-
-
+│    └── ChatListViewModel.swift            // Tüm iş mantığı ve filtreleme
+│
+│──Resources/
+│    └── Assets
+│
+│──AppDelegate.swift
+│──SceneDelegate.swift
+│──Info.plist
 
     
