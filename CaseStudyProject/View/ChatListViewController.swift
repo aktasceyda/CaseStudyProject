@@ -19,14 +19,14 @@ final class ChatListViewController: UIViewController {
     private var tableViewTopConstraint: Constraint? // Arşiv buttonu ve tableView arasındaki dinamik boşluk problemi için yaratıldı.
     private let filterStack = UIStackView()
     
-    private let titleLabel: UILabel = {
+    /*private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Sohbetler"
         label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         label.textColor = .label
         label.textAlignment = .center
         return label
-    }()
+    }()*/
 
     private let searchTextField: UITextField = {
         let tf = UITextField()
@@ -69,7 +69,7 @@ final class ChatListViewController: UIViewController {
 
     private func setupUI() {
         view.backgroundColor = .systemBackground
-        title = "Sohbetler" // TODO**********************bunları uıview yap .
+        title = "Sohbetler"
         //self.navigationItem.title = ""
 
         //view.addSubview(titleLabel)
@@ -90,7 +90,7 @@ final class ChatListViewController: UIViewController {
             target: self,
             action: #selector(didTapAdd)
         )
-
+        
         view.addSubview(searchTextField)
         searchTextField.snp.makeConstraints { make in
             //make.top.equalTo(titleLabel.snp.bottom).offset(12)
@@ -271,6 +271,7 @@ final class ChatListViewController: UIViewController {
 
     @objc private func openArchivedChats() {
         let archiveVC = ArchivedChatsViewController(viewModel: viewModel)
+        navigationItem.backButtonTitle = "" //  Geri butonundaki yazı olmasın
         navigationController?.pushViewController(archiveVC, animated: true)
     }
 

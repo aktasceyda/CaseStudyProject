@@ -22,6 +22,15 @@ final class ChatCell: UITableViewCell {
         return label
     }()
     
+    private let iconStackView: UIStackView = { //iconları sıralamak için oluşturulmuştur.
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.distribution = .equalSpacing
+        stack.spacing = 8
+        return stack
+    }()
+
     private let messageLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
@@ -50,7 +59,7 @@ final class ChatCell: UITableViewCell {
     
     private let pinImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "pin")
+        iv.image = UIImage(systemName: "pin.fill")
         iv.tintColor = .gray
         iv.contentMode = .scaleAspectFit
         iv.isHidden = true
@@ -64,7 +73,7 @@ final class ChatCell: UITableViewCell {
         label.textColor = .white
         label.backgroundColor = .systemBlue
         label.clipsToBounds = true
-        label.layer.cornerRadius = 12
+        label.layer.cornerRadius = 10
         label.isHidden = true
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
@@ -84,9 +93,10 @@ final class ChatCell: UITableViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(messageLabel)
         contentView.addSubview(dateLabel)
-        contentView.addSubview(muteImageView)
-        contentView.addSubview(pinImageView)
-        contentView.addSubview(unreadBadgeLabel)
+        //contentView.addSubview(muteImageView)
+        //contentView.addSubview(pinImageView)
+        //contentView.addSubview(unreadBadgeLabel)
+        contentView.addSubview(iconStackView)
         
         avatarImageView.snp.makeConstraints { make in
             make.size.equalTo(48)
@@ -105,32 +115,44 @@ final class ChatCell: UITableViewCell {
             make.trailing.lessThanOrEqualTo(dateLabel.snp.leading).offset(-8)
         }
         
-        messageLabel.snp.makeConstraints { make in
+        /*messageLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(4)
             make.leading.equalTo(nameLabel)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview().offset(-12)
         }
         
-        unreadBadgeLabel.snp.makeConstraints { make in
-            make.height.width.equalTo(24)
+        iconStackView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(12)
-            make.centerY.equalTo(messageLabel) 
+            make.centerY.equalTo(messageLabel)
+            make.height.equalTo(24)
+        }*/
+        iconStackView.snp.makeConstraints { make in
+            make.centerY.equalTo(messageLabel)
+            make.trailing.equalToSuperview().inset(12)
+            make.leading.greaterThanOrEqualTo(nameLabel.snp.trailing).offset(8)
+            make.height.equalTo(20)
         }
-        
-        pinImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(16)
-            make.trailing.equalTo(unreadBadgeLabel.snp.leading).offset(-12)
-            make.centerY.equalTo(unreadBadgeLabel)
-        }
-        
+
         muteImageView.snp.makeConstraints { make in
             make.width.height.equalTo(16)
-            make.trailing.equalTo(pinImageView.snp.leading).offset(-12)
-            make.centerY.equalTo(unreadBadgeLabel)
+        }
+
+        pinImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(16)
+        }
+
+        unreadBadgeLabel.snp.makeConstraints { make in
+            make.width.height.equalTo(20)
+        }
+
+        messageLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(4)
+            make.leading.equalTo(nameLabel)
+            make.trailing.lessThanOrEqualTo(iconStackView.snp.leading).offset(-8)
+            make.bottom.equalToSuperview().offset(-12)
         }
     }
-    
     
     func configure(with chat: Chat) {
         nameLabel.text = chat.name
@@ -146,17 +168,30 @@ final class ChatCell: UITableViewCell {
         messageLabel.font = chat.isUnread
             ? .boldSystemFont(ofSize: 14)
             : .systemFont(ofSize: 14)
-
-        if chat.unreadCount > 0 {
-            unreadBadgeLabel.isHidden = false
-            unreadBadgeLabel.text = "\(chat.unreadCount)"
-        } else {
-            unreadBadgeLabel.isHidden = true
-        }
         
-        // Mute ve Pin
-        muteImageView.isHidden = !chat.isMuted
-        pinImageView.isHidden = !chat.isPinned
+        iconStackView.arrangedSubviews.forEach {
+                iconStackView.removeArrangedSubview($0)
+                $0.removeFromSuperview()
+            }
+
+       
+        if chat.isMuted {
+                   muteImageView.isHidden = false
+                   iconStackView.addArrangedSubview(muteImageView)
+               }
+
+               if chat.isPinned {
+                   pinImageView.isHidden = false
+                   iconStackView.addArrangedSubview(pinImageView)
+               }
+
+               if chat.unreadCount > 0 {
+                   unreadBadgeLabel.isHidden = false
+                   unreadBadgeLabel.text = "\(chat.unreadCount)"
+                   iconStackView.addArrangedSubview(unreadBadgeLabel)
+               }
+        
+        
     }
     
     private func formatDate(_ date: Date) -> String {

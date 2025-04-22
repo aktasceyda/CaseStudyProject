@@ -100,8 +100,6 @@ final class ChatListViewModel {
         case .groups: return 2
         }
     }
-
-    // MARK: - Init
     
     init() {
         loadMockData()
@@ -111,8 +109,6 @@ final class ChatListViewModel {
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         return formatter.date(from: string) ?? Date()
     }
-
-    // MARK: - Functions
 
     func loadMockData() {
         allChats = [
@@ -124,7 +120,7 @@ final class ChatListViewModel {
             Chat(id: UUID(), name: "Scout Ekibi", lastMessage: "Maç raporu hazırlandı.", date: dateFrom("2025-04-15 15:00"), isArchived: false, isMuted: false, isUnread: true, isPinned: false, avatarImageName: "scout", unreadCount: 1),
             Chat(id: UUID(), name: "Turnuva Planlama", lastMessage: "Final tarihi kesinleşti.", date: dateFrom("2025-03-17 18:00"), isArchived: false, isMuted: true, isUnread: false, isPinned: false, avatarImageName: "calendar", unreadCount: 0),
             Chat(id: UUID(), name: "U17 Kadrosu", lastMessage: "Oyuncu listesi güncellendi.", date: dateFrom("2025-04-19 21:00"), isArchived: true, isMuted: false, isUnread: true, isPinned: false, avatarImageName: "person3", unreadCount: 3),
-            Chat(id: UUID(), name: "Basın Toplantısı", lastMessage: "Soru listesi geldi.", date: dateFrom("2025-04-18 18:00"), isArchived: false, isMuted: false, isUnread: false, isPinned: false, avatarImageName: "microphone", unreadCount: 0),
+            Chat(id: UUID(), name: "Basın Toplantısı", lastMessage: "Soru listesi geldi.", date: dateFrom("2025-04-18 18:00"), isArchived: false, isMuted: true, isUnread: true, isPinned: false, avatarImageName: "microphone", unreadCount: 1),
             Chat(id: UUID(), name: "Saha Görevlileri", lastMessage: "Saha çizimi tamamlandı.", date: Date(), isArchived: true, isMuted: true, isUnread: false, isPinned: false, avatarImageName: "whistle", unreadCount: 0)
             
 
