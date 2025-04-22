@@ -4,26 +4,16 @@ Bu proje, iOS için 'Swift + SnapKit' kullanılarak geliştirilen bir sohbet pro
 Uygulama, MVVM (Model-View-ViewModel) mimarisi temel alınarak yapılandırılmıştır. 
 Sohbet listesi, arşivleme, etkileşimler sonucu liste güncelleme ve kullanıcı etkileşimleri gibi işlevler örneklenmiştir.
 
----
-
-## ✨ Özellikler
-
-- 🔍 Arama çubuğu ile kişi veya grup filtreleme
-- 🗂 "Tümü", "Okunmamış", "Gruplar" sekmeleri ile filtreleme
-- 📌 Sabitlenmiş sohbetler
-- 🔕 Sessize alınmış sohbetler
-- 📬 Okunmamış mesaj rozetleri
-- 🗃 Arşivlenmiş sohbetlere geçiş ve arşivden çıkarma
-- 👆 Swipe aksiyonları ile arşivle, sil, ses aç
-- 🧱 MVVM mimarisi
-- 🎨 SnapKit ile dinamik ve duyarlı layout tasarımı
 
 ---
 
-Notlar
--Swipe aksiyonlarından arşiv hariç diğerleri işlevsizdir, demo akışı amaçlı yerleştirilmiştir.
--Proje genelinde MVVM mimarisi ile proje kapsamında istenilen özellikler ön planda tutulmuştur. Arayüz tasarım ve bileşenlerinin genel yapıları uygulanmıştır.
-Örneğin, icon imageların işlevsel uygunluğu göze alınalarak bu projede kullanılmıştır.
+## Notlar
+- Swipe aksiyonlarından arşiv hariç diğerleri işlevsizdir, demo akışı amaçlı yerleştirilmiştir.
+- Proje genelinde MVVM mimarisi ile proje kapsamında istenilen özellikler ön planda tutulmuştur. Arayüz tasarım ve bileşenlerinin genel yapıları uygulanmıştır.Örneğin, icon imageların işlevsel uygunluğu göze alınalarak bu projede kullanılmıştır.
+- Okunmayan messajlar koyu renkte yazılmıştır.
+- Okunmayan mesaj sayısı listelenmiştir.
+- Sessiz,başa tutturukan(pin),okunmamış mesaj sayısı gibi iconlar filtreleme dahilinde chat alanına yansıtılmıştır.
+- Mock verilerden gelen mesajların tarihlerine göre, başa tutturulan(isPinned = true) verilerin önceliği korunarak bir sıralama yapılmıştır.
 
 ## Proje Yapısı
 
